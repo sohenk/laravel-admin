@@ -60,6 +60,26 @@
 <script>
     function LA() {}
     LA.token = "{{ csrf_token() }}";
+
+       $(function(){
+    $('.sidebar-menu li:not(.treeview) > a').on('click', function(){
+        var $parent = $(this).parent().addClass('active');
+        $parent.siblings('.treeview.active').find('> a').trigger('click');
+        $parent.siblings().removeClass('active').find('li').removeClass('active');
+    });
+
+    $(window).on('load', function(){
+        $('.sidebar-menu a').each(function(){
+            if(this.href === window.location.href){
+                $(this).parent().addClass('active')
+                    .closest('.treeview-menu').addClass('.menu-open')
+                    .closest('.treeview').addClass('active')
+                    .closest('.treeview-menu').addClass('.menu-open')
+                    .closest('.treeview').addClass('active')
+            }
+        });
+    });
+});
 </script>
 
 <!-- REQUIRED JS SCRIPTS -->
